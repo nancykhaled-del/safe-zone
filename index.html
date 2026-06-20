@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Everything ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Cairo',sans-serif;
+}
+
+body{
+    background:#f4ede7;
+    min-height:100vh;
+    overflow-x:hidden;
+    color:#6f5a5a;
+}
+
+/* PAGES */
+.page{
+    display:none;
+    padding:20px;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+}
+
+.page.active{
+    display:flex;
+}
+
+/* CONTAINER */
+.container{
+    width:100%;
+    max-width:500px;
+    text-align:center;
+    margin:auto;
+}
+
+/* PAGE 1 */
+.envelope{
+    width:100%;
+    background:#efe4da;
+    padding:25px;
+    border-radius:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+.hero-img{
+    width:100%;
+    max-width:350px;
+    border-radius:20px;
+    display:block;
+    margin:auto;
+}
+
+.title{
+    font-size:26px;
+    margin:15px 0;
+    color:#7b5b5b;
+}
+
+.lock{
+    font-size:24px;
+    margin:10px 0;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:none;
+    outline:none;
+    border-radius:30px;
+    background:white;
+    font-size:16px;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+button{
+    width:auto;
+    border:none;
+    cursor:pointer;
+    padding:14px 30px;
+    border-radius:30px;
+    font-size:16px;
+    background:#cf7f85;
+    color:white;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+/* PAGE 2 */
+.card{
+    background:#fbf7f3;
+    padding:25px;
+    border-radius:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+}
+
+.message{
+    font-size:19px;
+    line-height:2;
+    min-height:180px;
+}
+
+/* PAGE 3 */
+.counter-card{
+    background:#fbf7f3;
+    padding:25px;
+    border-radius:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+}
+
+.counter{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-top:20px;
+}
+
+.box{
+    background:#f3ebe5;
+    padding:15px;
+    border-radius:20px;
+}
+
+.number{
+    font-size:26px;
+    font-weight:bold;
+    color:#c17d8d;
+}
+
+.gallery{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+    justify-content:center;
+}
+
+.gallery img{
+    width:calc(50% - 10px);
+    max-width:140px;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:15px;
+    padding:5px;
+    background:white;
+    box-shadow:0 5px 10px rgba(0,0,0,.08);
+}
+
+/* HEART ANIMATION */
+.heart{
+    position:fixed;
+    animation:float 5s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);opacity:0;}
+    20%{opacity:1;}
+    100%{transform:translateY(-100px);opacity:0;}
+}
+
+/* RESPONSIVE */
+@media (max-width:480px){
+
+    .page{padding:12px;}
+
+    .envelope,
+    .card,
+    .counter-card{
+        padding:18px;
+    }
+
+    .title{
+        font-size:20px;
+    }
+
+    .message{
+        font-size:16px;
+        line-height:1.7;
+    }
+
+    .number{
+        font-size:22px;
+    }
+
+    button{
+        width:100%;
+    }
+
+    .gallery img{
+        width:100%;
+        max-width:none;
+    }
+
+    .counter{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+    <source src="./music/we maloh.mp3.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+
+    <div class="container">
+        <div class="envelope">
+
+            <img src="./image/image7.jpg" class="hero-img">
+
+            <h2 class="title">my safe zone</h2>
+
+            <div class="lock">🔒</div>
+
+            <input type="password" id="password" placeholder="ENTER THE SECRET WORD">
+
+            <button onclick="checkPassword()">Unlock</button>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+
+    <div class="container">
+
+        <div class="card">
+
+            <h2>😍</h2>
+
+            <div class="message" id="typing"></div>
+
+            <button onclick="nextPage(3)">Next →</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+
+    <div class="container">
+
+        <div class="counter-card">
+
+            <h2>بدايتنا</h2>
+            <h3>31/12/2025</h3>
+
+            <div class="counter">
+
+                <div class="box"><div class="number" id="days">0</div>يوم</div>
+                <div class="box"><div class="number" id="hours">0</div>ساعة</div>
+                <div class="box"><div class="number" id="minutes">0</div>دقيقة</div>
+                <div class="box"><div class="number" id="seconds">0</div>ثانية</div>
+
+            </div>
+
+            <p style="margin-top:15px;">مش بحبك 🤎</p>
+
+            <div class="gallery">
+                <img src="./image/image6.jpg">
+                <img src="./image/image3.jpg">
+                <img src="./image/image2.jpg">
+                <img src="./image/image5.jpg">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* PASSWORD */
+const SECRET = "love";
+
+function checkPassword(){
+
+    let pass = document.getElementById("password").value;
+
+    if(pass === SECRET){
+        nextPage(2);
+        document.getElementById("music").play();
+        typeText();
+    }else{
+        alert("كلمة السر غلط ❤️");
+    }
+}
+
+/* NAVIGATION */
+function nextPage(page){
+
+    document.querySelectorAll(".page")
+    .forEach(p => p.classList.remove("active"));
+
+    document.getElementById("page"+page)
+    .classList.add("active");
+}
+
+/* TYPE TEXT */
+const text =
+"عمتا مضايقه منك وم بحبك يمااااازن وخلي صحابك ينفعوك وانزل كل يوم القهوة براحتك ✋🏻😔 بس خلاص بحبككك عامههه وحبيت الديزاين وهسيبه عشان ابقي احط فيه صورنا";
+
+let i = 0;
+
+function typeText(){
+
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeText,50);
+    }
+}
+
+/* COUNTER */
+const startDate = new Date("2025-12-31T00:00:00");
+
+function updateCounter(){
+
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+    const seconds = Math.floor((diff%(1000*60))/1000);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateCounter,1000);
+updateCounter();
+
+/* HEARTS */
+function createHeart(){
+
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "🤎";
+
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (Math.random()*15 + 15) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),5000);
+}
+
+setInterval(createHeart,400);
+
+</script>
+
+</body>
+</html>
